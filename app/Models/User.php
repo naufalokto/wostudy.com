@@ -94,6 +94,17 @@ class User extends Authenticatable
         return $this->hasMany(UserPresence::class);
     }
 
+    // Course relationships
+    public function userCourses(): HasMany
+    {
+        return $this->hasMany(UserCourse::class);
+    }
+
+    public function courses()
+    {
+        return $this->belongsToMany(Course::class, 'user_courses');
+    }
+
     // Methods for collaborative features
     public function getCurrentCollaborativeSessions()
     {

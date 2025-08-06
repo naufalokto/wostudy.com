@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('permission_type', ['can_edit', 'can_view']);
             $table->enum('status', ['online', 'offline', 'away'])->default('offline');
             $table->timestamp('last_seen_at')->nullable();
-            $table->timestamp('joined_at');
+            $table->timestamp('joined_at')->nullable();
             $table->timestamp('left_at')->nullable();
             $table->string('session_id')->nullable(); // Untuk tracking real-time session
             $table->json('user_agent')->nullable(); // Browser info

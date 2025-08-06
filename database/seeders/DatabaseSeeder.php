@@ -13,13 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Seeder files sudah siap untuk diisi manual
-        // Struktur database sudah lengkap
+        // Call other seeders
+        $this->call([
+            TodoCategoriesSeeder::class,
+            SampleDataSeeder::class,
+        ]);
         
-        // Create test user jika diperlukan
+        // Create test user if needed
         // User::factory()->create([
         //     'name' => 'Test User',
-        //     'username' => 'testuser',
+        //     'email' => 'test@example.com',
         // ]);
     }
 }
