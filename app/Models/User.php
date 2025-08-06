@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'profile_picture',
+        'department',
+        'student_id',
     ];
 
     /**
@@ -46,6 +50,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+
 
     // Relationships for collaborative features
     public function todoLists(): HasMany
