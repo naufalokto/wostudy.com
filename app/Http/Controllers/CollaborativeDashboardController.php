@@ -47,6 +47,13 @@ class CollaborativeDashboardController extends Controller
             'permission_type' => 'required|in:can_edit,can_view',
             'shared_with_email' => 'nullable|email',
             'expires_at' => 'nullable|date|after:now',
+            'max_concurrent_users' => 'nullable|integer|min:1|max:50',
+            'max_daily_access' => 'nullable|integer|min:1|max:1000',
+            'max_session_duration' => 'nullable|integer|min:300|max:86400', // 5 menit - 24 jam
+            'allowed_countries' => 'nullable|array',
+            'allowed_countries.*' => 'string|size:2',
+            'require_approval' => 'nullable|boolean',
+            'access_password' => 'nullable|string|min:4|max:50',
         ]);
 
         $todoList = TodoList::findOrFail($todoListId);
@@ -64,6 +71,12 @@ class CollaborativeDashboardController extends Controller
             'permission_type' => $request->permission_type,
             'share_link' => Str::random(32),
             'expires_at' => $request->expires_at,
+            'max_concurrent_users' => $request->max_concurrent_users ?? 10,
+            'max_daily_access' => $request->max_daily_access ?? 100,
+            'max_session_duration' => $request->max_session_duration ?? 3600,
+            'allowed_countries' => $request->allowed_countries ?? ['ID', 'MY', 'SG'],
+            'require_approval' => $request->require_approval ?? false,
+            'access_password' => $request->access_password ? bcrypt($request->access_password) : null,
         ]);
 
         return response()->json([

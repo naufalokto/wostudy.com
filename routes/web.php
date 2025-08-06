@@ -17,9 +17,10 @@ Route::get('/', function () {
 
 // Collaborative Dashboard Routes
 Route::prefix('collaborative')->group(function () {
-    // Public shared access
+    // Public shared access with limits
     Route::get('/shared/{shareToken}', [CollaborativeDashboardController::class, 'showCollaborativeDashboard'])
-        ->name('collaborative.dashboard');
+        ->name('collaborative.dashboard')
+        ->middleware('collaborative.limit');
     
     // Protected routes (require authentication)
     Route::middleware(['auth'])->group(function () {

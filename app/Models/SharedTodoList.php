@@ -17,12 +17,20 @@ class SharedTodoList extends Model
         'permission_type',
         'share_link',
         'is_active',
-        'expires_at'
+        'expires_at',
+        'max_concurrent_users',
+        'max_daily_access',
+        'max_session_duration',
+        'allowed_countries',
+        'require_approval',
+        'access_password'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
         'expires_at' => 'datetime',
+        'allowed_countries' => 'array',
+        'require_approval' => 'boolean',
     ];
 
     // Relationships
